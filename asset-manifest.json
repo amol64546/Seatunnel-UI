@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/seatunnel-web/static/css/main.eccac04f.css",
+    "main.js": "/seatunnel-web/static/js/main.11ed5f5c.js",
+    "index.html": "/seatunnel-web/index.html",
+    "main.eccac04f.css.map": "/seatunnel-web/static/css/main.eccac04f.css.map",
+    "main.11ed5f5c.js.map": "/seatunnel-web/static/js/main.11ed5f5c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eccac04f.css",
+    "static/js/main.11ed5f5c.js"
+  ]
+}
