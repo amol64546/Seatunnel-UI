@@ -13,6 +13,7 @@ export const defaultEnvConfig = {
 
 const EnvConfigPanel = ({ envConfig, setEnvConfig, onClose }) => {
   const [config, setConfig] = useState(envConfig);
+  const [newFields, setNewFields] = useState([]);
 
   const handleChange = (key, value) => {
     setConfig(prev => ({
@@ -37,12 +38,53 @@ const EnvConfigPanel = ({ envConfig, setEnvConfig, onClose }) => {
         value === null ? undefined : value
       ])
     );
+
+    newFields.forEach((field) => {
+      if (field.key && field.value !== undefined) {
+        cleanedConfig[field.key] = field.valueType === 'number' ? Number(field.value) :
+                                   field.valueType === 'boolean' ? field.value === 'true' :
+                                   field.valueType === 'array' ? JSON.parse(field.value) :
+                                   field.valueType === 'object' ? JSON.parse(field.value) :
+                                   field.value;
+      }
+    });
+
     setEnvConfig(cleanedConfig);
     onClose();
   };
 
   const handleReset = () => {
     setConfig(defaultEnvConfig);
+  };
+
+  const handleAddField = () => {
+    setNewFields([...newFields, { 
+      key: '', 
+      value: '', 
+      valueType: 'string', 
+      defaultValue: 'string' 
+    }]);
+  };
+
+  const handleFieldChange = (index, field, value) => {
+    const updatedFields = [...newFields];
+    updatedFields[index][field] = value;
+
+    if (field === 'valueType') {
+      updatedFields[index].value = value === 'number' ? 0 :
+                                   value === 'boolean' ? false :
+                                   value === 'array' ? '[]' :
+                                   value === 'object' ? '{}' :
+                                   '';
+    }
+
+    setNewFields(updatedFields);
+  };
+
+  const handleRemoveField = (index) => {
+    const updatedFields = [...newFields];
+    updatedFields.splice(index, 1);
+    setNewFields(updatedFields);
   };
 
   return (
@@ -133,6 +175,56 @@ const EnvConfigPanel = ({ envConfig, setEnvConfig, onClose }) => {
             </div>
           </div>
           
+          <div className="dynamic-fields">
+            <h4>Additional Configuration:</h4>
+            {newFields.map((field, index) => (
+              <div key={index} className="config-field-row">
+                <input
+                  type="text"
+                  placeholder="Field name"
+                  value={field.key}
+                  onChange={(e) => handleFieldChange(index, 'key', e.target.value)}
+                  required
+                />
+                <select
+                  value={field.valueType}
+                  onChange={(e) => handleFieldChange(index, 'valueType', e.target.value)}
+                >
+                  <option value="string">String</option>
+                  <option value="number">Number</option>
+                  <option value="boolean">Boolean</option>
+                  <option value="array">Array</option>
+                  <option value="object">Object</option>
+                </select>
+                <input
+                  type="text"
+                  placeholder="Value"
+                  value={field.value}
+                  onChange={(e) => handleFieldChange(index, 'value', e.target.value)}
+                  defaultValue={field.valueType === 'number' ? 0 :
+                                field.valueType === 'boolean' ? false :
+                                field.valueType === 'array' ? '[]' :
+                                field.valueType === 'object' ? '{}' :
+                                ''}
+                />
+                <button
+                  type="button"
+                  onClick={() => handleRemoveField(index)}
+                  className="remove-field"
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={handleAddField}
+              className="add-field"
+            >
+              Add Configuration Field
+            </button>
+          </div>
+
           <div className="form-actions">
             <button type="button" onClick={handleReset} className="reset-btn">
               Reset Defaults

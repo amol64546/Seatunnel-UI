@@ -209,6 +209,15 @@ function FlowBuilder() {
     }));
   };
 
+  const onEdgeUpdate = useCallback(
+    (oldEdge, newConnection) =>
+      setEdges((eds) => {
+        const updatedEdges = eds.filter((e) => e.id !== oldEdge.id);
+        return addEdge({ ...newConnection, markerEnd: { type: MarkerType.ArrowClosed } }, updatedEdges);
+      }),
+    [setEdges]
+  );
+
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
       <ReactFlow
@@ -235,6 +244,7 @@ function FlowBuilder() {
         onDrop={onDrop}
         onDragOver={onDragOver}
         onNodeDoubleClick={onNodeDoubleClick}
+        onEdgeUpdate={onEdgeUpdate}
         connectionLineStyle={{ stroke: '#ddd', strokeWidth: 2 }}
         connectionLineType="bezier"
         connectionMode="strict"
