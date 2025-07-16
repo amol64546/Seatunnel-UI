@@ -608,7 +608,7 @@ html, body {
   margin-right: 6px;
 }
 
-.history-controls {
+/* .history-controls {
   display: flex;
   gap: 8px;
   margin-top: 10px;
@@ -662,4 +662,4 @@ html, body {
   justify-content: flex-end;
   gap: 10px;
   margin-top: 20px;
-}
+} */
