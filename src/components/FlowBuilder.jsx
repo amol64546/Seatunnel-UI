@@ -271,7 +271,7 @@ function FlowBuilder() {
           <NodePalette />
           <button
             onClick={() => setShowEnvConfigModal(true)}
-            className="env-config-btn"
+            className="env-config-pipeline-btn"
           >
             Environment Config
           </button>
@@ -279,7 +279,7 @@ function FlowBuilder() {
             queryParams={queryParams}
             handleQueryParamChange={handleQueryParamChange}
           />
-          <button onClick={submitPipeline} className="submit-btn">
+          <button onClick={submitPipeline} className="submit-pipeline-btn">
             Submit Pipeline
           </button>
         </Panel>

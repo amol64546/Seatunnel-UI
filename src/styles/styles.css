@@ -226,11 +226,13 @@ html, body {
   border-color: #5cc85c;
 }
 
-.env-config-btn {
+/* env config buttons style */
+
+.env-config-pipeline-btn{
   background: #ffb74d;
   color: #333;
   border: none;
-  padding: 8px 12px;
+  padding: 10px 12px;
   border-radius: 4px;
   cursor: pointer;
   margin: 8px 0 5px;
@@ -240,7 +242,7 @@ html, body {
   transition: all 0.2s;
 }
 
-.submit-btn {
+.submit-pipeline-btn {
   background: #1e8123;
   color: white;
   border: none;
@@ -254,8 +256,38 @@ html, body {
   transition: all 0.2s;
 }
 
-.env-config-btn:hover,
-.submit-btn:hover {
+.save-config-btn{
+  background: #1e8123;
+  color: white;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 5px;
+  width: 100%;
+  font-size: 13px;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.env-config-btn {
+  background: #ffb74d;
+  color: #333;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 5px;
+  width: 100%;
+  font-size: 13px;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.save-config-btn:hover
+.env-config-pipeline-btn:hover,
+.submit-pipeline-btn:hover,
+.env-config-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }

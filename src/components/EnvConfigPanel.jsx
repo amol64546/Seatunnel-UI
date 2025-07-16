@@ -15,6 +15,18 @@ const EnvConfigPanel = ({ envConfig, setEnvConfig, onClose }) => {
   const [config, setConfig] = useState(envConfig);
   const [newFields, setNewFields] = useState([]);
 
+  React.useEffect(() => {
+    const additionalFields = Object.entries(config).filter(([key]) => !Object.keys(defaultEnvConfig).includes(key));
+    setNewFields(additionalFields.map(([key, value]) => ({
+      key,
+      value,
+      valueType: typeof value === 'boolean' ? 'boolean' :
+                Array.isArray(value) ? 'array' :
+                typeof value === 'object' ? 'object' :
+                typeof value === 'number' ? 'number' : 'string'
+    })));
+  }, [config]);
+
   const handleChange = (key, value) => {
     setConfig(prev => ({
       ...prev,
@@ -189,6 +201,8 @@ const EnvConfigPanel = ({ envConfig, setEnvConfig, onClose }) => {
                 <select
                   value={field.valueType}
                   onChange={(e) => handleFieldChange(index, 'valueType', e.target.value)}
+                  required
+                  style={{ width: '120px' }}
                 >
                   <option value="string">String</option>
                   <option value="number">Number</option>
@@ -196,17 +210,26 @@ const EnvConfigPanel = ({ envConfig, setEnvConfig, onClose }) => {
                   <option value="array">Array</option>
                   <option value="object">Object</option>
                 </select>
-                <input
-                  type="text"
-                  placeholder="Value"
-                  value={field.value}
-                  onChange={(e) => handleFieldChange(index, 'value', e.target.value)}
-                  defaultValue={field.valueType === 'number' ? 0 :
-                                field.valueType === 'boolean' ? false :
-                                field.valueType === 'array' ? '[]' :
-                                field.valueType === 'object' ? '{}' :
-                                ''}
-                />
+                {field.valueType === 'boolean' ? (
+                  <select
+                    value={field.value}
+                    onChange={(e) => handleFieldChange(index, 'value', e.target.value === 'true')}
+                    required
+                    style={{ width: '120px' }}
+                  >
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                  </select>
+                ) : (
+                  <input
+                    type="text"
+                    placeholder="Value"
+                    value={field.value}
+                    onChange={(e) => handleFieldChange(index, 'value', e.target.value)}
+                    required
+                    style={{ flex: 1 }}
+                  />
+                )}
                 <button
                   type="button"
                   onClick={() => handleRemoveField(index)}
@@ -226,13 +249,24 @@ const EnvConfigPanel = ({ envConfig, setEnvConfig, onClose }) => {
           </div>
 
           <div className="form-actions">
-            <button type="button" onClick={handleReset} className="reset-btn">
+            <button
+              type="button"
+              onClick={handleReset}
+              className="env-config-btn"
+            >
               Reset Defaults
             </button>
-            <button type="button" onClick={onClose} className="cancel-btn">
+            <button
+              type="button"
+              onClick={onClose}
+              className="env-config-btn"
+            >
               Cancel
             </button>
-            <button type="submit" className="submit-btn">
+            <button
+              type="submit"
+              className="save-config-btn"
+            >
               Save
             </button>
           </div>
