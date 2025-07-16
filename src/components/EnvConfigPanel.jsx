@@ -85,8 +85,8 @@ const EnvConfigPanel = ({ envConfig, setEnvConfig, onClose }) => {
     if (field === 'valueType') {
       updatedFields[index].value = value === 'number' ? 0 :
                                    value === 'boolean' ? false :
-                                   value === 'array' ? '[]' :
-                                   value === 'object' ? '{}' :
+                                   value === 'array' ? '[ ]' :
+                                   value === 'object' ? '{ }' :
                                    '';
     }
 
