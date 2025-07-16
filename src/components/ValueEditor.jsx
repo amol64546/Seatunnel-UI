@@ -106,6 +106,7 @@ const ValueEditor = ({ value, onChange, disabled = false }) => {
             disabled={disabled}
             placeholder={`Enter ${type} value`}
             className={`value-input ${!isValid ? 'invalid' : ''}`}
+            required
           />
         );
     }
