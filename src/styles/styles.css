@@ -639,3 +639,15 @@ html, body {
 .query-param-row input[type="checkbox"] {
   margin-right: 6px;
 }
+
+.source-node .node-header {
+  background: #ffcdd2;
+}
+
+.transform-node .node-header {
+  background: #bbdefb;
+}
+
+.sink-node .node-header {
+  background: #c8e6c9;
+}
