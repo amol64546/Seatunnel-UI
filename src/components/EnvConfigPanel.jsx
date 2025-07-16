@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const defaultEnvConfig = {
+export const defaultEnvConfig = {
   "job.mode": "BATCH",
   "parallelism": 1,
   "job.retry.times": 3,
