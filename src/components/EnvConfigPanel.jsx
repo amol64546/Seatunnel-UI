@@ -37,7 +37,7 @@ const EnvConfigPanel = ({ envConfig, setEnvConfig, onClose }) => {
         value === null ? undefined : value
       ])
     );
-    setEnvConfig(config);
+    setEnvConfig(cleanedConfig);
     onClose();
   };
 

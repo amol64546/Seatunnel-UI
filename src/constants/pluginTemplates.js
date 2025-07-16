@@ -2,6 +2,16 @@ export const PLUGIN_TEMPLATES = {
 
 
   "source": {
+    "FakeSource": {
+      "row.num": 10,
+      "schema": {
+        "fields": {
+          "id": "int",
+          "name": "string",
+          "age": "int"
+        }
+      }
+    },
     "PostgreSQL": {
       "plugin_name": "Jdbc",
       "url": "jdbc:postgresql://host:5432/seatunnel",

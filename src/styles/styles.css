@@ -536,12 +536,22 @@ html, body {
   flex: 1;
   display: flex;
   gap: 8px;
+  align-items: center; /* Ensure items are vertically aligned */
 }
 
-.value-editor select,
+.value-editor select {
+  width: 80px; /* Fixed width for the select dropdown */
+  padding: 6px;
+  font-size: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  flex: none; /* Prevent select from growing */
+}
+
 .value-editor input,
 .value-editor textarea {
-  flex: 1;
+  flex: 1; /* Take remaining space */
+  min-width: 0; /* Allow shrinking */
   padding: 6px;
   font-size: 12px;
   border: 1px solid #ddd;
@@ -580,7 +590,7 @@ html, body {
 }
 
 .query-param-row input[type="text"] {
-  width: 100%;
+  width: 92%;
   padding: 4px 6px;
   font-size: 11px;
   border: 1px solid #ccc;
